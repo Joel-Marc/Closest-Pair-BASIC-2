@@ -1,4 +1,4 @@
-# An Optimized Divide-and-Conquer Algorithm for the Closest-Pair Problem in the Planar Case
+# An Optimized Divide-and-Conquer Algorithm for the Closest-Pair Problem in the Planar Case (BASIC-2 Algorithm)
 Also With a Heap Implementaion
 -----------------------------------------------------------------
 In the "BASIC-2.py" program, we implement the Basic-2 Algorithm
