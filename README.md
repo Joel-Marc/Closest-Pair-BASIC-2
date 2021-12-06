@@ -1,6 +1,8 @@
 # An Optimized Divide-and-Conquer Algorithm for the Closest-Pair Problem in the Planar Case (BASIC-2 Algorithm)
 Also With a Heap Implementaion
 -----------------------------------------------------------------
+**The paper we have refered also has been uploaded**
+
 In the "BASIC-2.py" program, we implement the Basic-2 Algorithm
 using Python lists and undertake the familiar sorting approach to generate 
 the halves. We recombine solutions from halves created and finally return 
