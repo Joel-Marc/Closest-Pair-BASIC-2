@@ -1,7 +1,11 @@
-from flask import Flask,request
-app = Flask(__name__)
-import math
 import random
+import math
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from flask import Response
+import io
+from flask import Flask, request
+app = Flask(__name__)
 
 
 page = '''
@@ -16,9 +20,15 @@ page = '''
 </html>
 '''
 
+fin_page = '''
+<img src="/plot.png" alt="my plot">
+'''
+
+
 @app.route("/")
 def home():
     return page
+
 
 @app.route("/result")
 def result():
@@ -29,14 +39,14 @@ def result():
     flag = 0
     ret = []
     for i in string:
-        if i =='[' and flag ==0:
-            flag= 1
-        elif i ==']' and flag==1:
+        if i == '[' and flag == 0:
+            flag = 1
+        elif i == ']' and flag == 1:
             s = final.split(',')
             ret.append(s)
-            flag =0
-            final =""
-        elif i==',' and flag ==0:
+            flag = 0
+            final = ""
+        elif i == ',' and flag == 0:
             continue
         else:
             final = final + i
@@ -49,8 +59,25 @@ def result():
     sol = cpp(ret)
     sol1 = str(sol[0])
     sol2 = str(sol[1])
-    retval = "The minimum distance is " + sol1 +"\n"+"The closest points are "+ sol2
+    retval = "The minimum distance is " + sol1 + "\n"+"The closest points are " + sol2
     return retval
+
+
+@app.route('/plot.png')
+def plot_png():
+    fig = create_figure()
+    output = io.BytesIO()
+    FigureCanvas(fig).print_png(output)
+    return Response(output.getvalue(), mimetype='image/png')
+
+
+def create_figure():
+    fig = Figure()
+    axis = fig.add_subplot(1, 1, 1)
+    xs = range(100)
+    ys = [random.randint(1, 50) for x in xs]
+    axis.plot(xs, ys)
+    return fig
 
 
 def cpp(val):
@@ -63,13 +90,10 @@ def cpp(val):
         Py = sorted(P, key=lambda x: x[1])
         return Px, Py
 
-
     Px, Py = Initial_Sort(P)
-
 
     def Euclidean_Distance(P1, P2):
         return math.sqrt((P1[0] - P2[0])**2 + (P1[1] - P2[1])**2)
-
 
     def Closest_Pair(Px, Py):
         if len(Px) <= 3:
@@ -149,9 +173,8 @@ def cpp(val):
                 j += 1
         return d_min, Target_Pair
 
-
     soln = Closest_Pair(Px, Py)
-    print("The points are :",P)
+    print("The points are :", P)
     print("\n\n\nThe minimum Distance is : ", soln[0])
     print("\n\nThe Closest Pairs are : ", soln[1])
     return soln
