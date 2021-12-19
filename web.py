@@ -4,7 +4,7 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from flask import Response
 import io
-from flask import Flask, request,render_template
+from flask import Flask, request, render_template
 app = Flask(__name__)
 
 
@@ -91,6 +91,13 @@ page = '''
         </form>
             <i class="fas fa-search"></i>
     </div>
+    <div class="box1">
+        <form name="search" action ="/result1">
+            <input type="text" class="input" name="fu"
+            onmouseout="document.search.txt.value = ''">
+        </form>
+            <i class="fas fa-search"></i>
+    </div>
 </body>
 </html>
 
@@ -131,6 +138,22 @@ def result():
         for j in range(2):
             ret[i][j] = int(ret[i][j])
 
+    print(ret)
+    sol = cpp(ret)
+    sol1 = str(sol[0])
+    sol2 = str(sol[1])
+    print(sol)
+    retval = "The minimum distance is " + sol1 + "\n"+"The closest points are " + sol2
+    fig = create_figure(sol, ret)
+    output = io.BytesIO()
+    FigureCanvas(fig).print_png(output)
+    return Response(output.getvalue(), mimetype='image/png')
+
+
+@app.route("/result1")
+def result1():
+    ind = request.args.get('fu')
+    ret = [[random.randint(0, 1250000), random.randint(0, 1250000)] for i in range(int(ind))]
     print(ret)
     sol = cpp(ret)
     sol1 = str(sol[0])
