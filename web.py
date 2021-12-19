@@ -22,12 +22,18 @@ page = '''
     background: #140f1d;
   }
   .box{
-      position: absolute;
-      top: 50%;
+      position: relative;
+      top: 20%;
       left: 50%;
       transform: translate(-50%,-50%);
   }
   .header {
+    position:relative;
+    text-align:center;
+    color:white;
+    padding: 10;
+  }
+  .header2 {
     position:relative;
     text-align:center;
     color:white;
@@ -46,6 +52,14 @@ page = '''
     letter-spacing: 2px;
     font-size:48px;
   }
+  h2{
+    font-family: 'Lato', sans-serif;
+    font-weight:10;
+    letter-spacing: 2px;
+    font-size:30px;
+    color: white;
+
+  }
   .input {
       padding: 10px;
       width: 80px;
@@ -61,12 +75,12 @@ page = '''
       transition: .5s;
   }
   .box:hover input{
-      width: 350px;
+      width: 1050px;
       background: #272133;
       border-radius: 10px;
   }
   i{
-      position: absolute;
+      position: relative;
       top: 50%;
       right: 15px;
       transform: translate(-50%,-50%);
@@ -85,13 +99,15 @@ page = '''
     <h1>Closest Pair Of Points</h1>
     </div>
     <div class="box">
+      <h2>Enter Points as List</h2>
         <form name="search" action ="/result">
             <input type="text" class="input" name="fu"
             onmouseout="document.search.txt.value = ''">
         </form>
             <i class="fas fa-search"></i>
     </div>
-    <div class="box1">
+    <div class="box">
+      <h2>Enter Number of Random Points</h2>
         <form name="search" action ="/result1">
             <input type="text" class="input" name="fu"
             onmouseout="document.search.txt.value = ''">
