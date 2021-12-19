@@ -183,7 +183,7 @@ def result1():
 
 
 def create_figure(sol, ret):
-    fig = Figure()
+    fig = Figure(figsize=(30,15))
     ox = [x[0] for x in ret]
     oy = [x[1] for x in ret]
 
