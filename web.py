@@ -193,7 +193,7 @@ def create_figure(sol, ret):
     ox = [x[0] for x in sol[1]]
     oy = [x[1] for x in sol[1]]
 
-    axis.plot(ox, oy)
+    axis.plot(ox, oy, "bo-")
     return fig
 
 
