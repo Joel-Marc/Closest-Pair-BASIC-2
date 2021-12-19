@@ -33,7 +33,7 @@ def home():
 @app.route("/result")
 def result():
     ind = request.args.get('fu')
-    print(type(ind))
+    # print(type(ind))
     string = ind
     final = ""
     flag = 0
@@ -55,28 +55,30 @@ def result():
         for j in range(2):
             ret[i][j] = int(ret[i][j])
 
-    print(type(ret))
+    print(ret)
     sol = cpp(ret)
     sol1 = str(sol[0])
     sol2 = str(sol[1])
+    print(sol)
     retval = "The minimum distance is " + sol1 + "\n"+"The closest points are " + sol2
-    return retval
-
-
-@app.route('/plot.png')
-def plot_png():
-    fig = create_figure()
+    fig = create_figure(sol, ret)
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
     return Response(output.getvalue(), mimetype='image/png')
 
 
-def create_figure():
+def create_figure(sol, ret):
     fig = Figure()
+    ox = [x[0] for x in ret]
+    oy = [x[1] for x in ret]
+
     axis = fig.add_subplot(1, 1, 1)
-    xs = range(100)
-    ys = [random.randint(1, 50) for x in xs]
-    axis.plot(xs, ys)
+    axis.plot(ox, oy, "ro")
+
+    ox = [x[0] for x in sol[1]]
+    oy = [x[1] for x in sol[1]]
+
+    axis.plot(ox, oy)
     return fig
 
 
