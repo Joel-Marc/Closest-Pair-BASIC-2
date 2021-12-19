@@ -169,7 +169,7 @@ def result():
 @app.route("/result1")
 def result1():
     ind = request.args.get('fu')
-    ret = [[random.randint(0, 1250000), random.randint(0, 1250000)] for i in range(int(ind))]
+    ret = [[random.randint(0, 12500), random.randint(0, 12500)] for i in range(int(ind))]
     print(ret)
     sol = cpp(ret)
     sol1 = str(sol[0])
@@ -183,7 +183,7 @@ def result1():
 
 
 def create_figure(sol, ret):
-    fig = Figure(figsize=(30,15))
+    fig = Figure(figsize=(30, 15))
     ox = [x[0] for x in ret]
     oy = [x[1] for x in ret]
 
